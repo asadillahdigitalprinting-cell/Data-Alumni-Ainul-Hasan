@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#075985">
+  <meta name="description" content="Sistem Informasi Rekapitulasi Alumni Pondok Pesantren Ainul Hasan">
+  <title>Alumni Pondok Pesantren Ainul Hasan</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <img src="assets/logo-pondok-ainul-hasan.png" alt="Logo Pondok Pesantren Ainul Hasan">
+      <div><strong>Pondok Pesantren Ainul Hasan</strong><span>Sistem Informasi Rekapitulasi Alumni</span></div>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Buka menu" aria-expanded="false">☰</button>
+    <nav id="mainNav">
+      <a href="#beranda">Beranda</a><a href="#daftar">Daftar Alumni</a><a href="#data">Data Alumni</a>
+      <a href="#statistik">Statistik</a><button class="nav-login" id="openAdmin">Login Admin</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="beranda">
+      <div class="hero-content">
+        <p class="eyebrow">MENJALIN SILATURAHMI</p>
+        <h1>Rekapitulasi Alumni<br><span>Pondok Pesantren Ainul Hasan</span></h1>
+        <p class="hero-description">Satu data, satu keluarga, tetap terhubung dalam ukhuwah Islamiyah.</p>
+        <div class="hero-actions"><a class="button button-gold" href="#daftar">Daftarkan Diri</a><a class="button button-outline" href="#data">Lihat Alumni</a></div>
+      </div>
+      <div class="hero-art" aria-hidden="true"><div class="moon"></div><div class="mosque"><div class="dome"></div><div class="minaret m1"></div><div class="minaret m2"></div><div class="building"><span></span><span></span><span></span><span></span><span></span></div></div></div>
+    </section>
+
+    <section class="stats" id="statistik">
+      <article class="stat-card"><span class="stat-icon">♙</span><div><p>Total Alumni</p><strong id="totalCount">0</strong></div></article>
+      <article class="stat-card"><span class="stat-icon">✓</span><div><p>Terverifikasi</p><strong id="verifiedCount">0</strong></div></article>
+      <article class="stat-card"><span class="stat-icon">◷</span><div><p>Menunggu Verifikasi</p><strong id="pendingCount">0</strong></div></article>
+    </section>
+
+    <section class="content-grid">
+      <section class="panel form-panel" id="daftar">
+        <div class="section-heading"><div><p class="eyebrow">FORMULIR</p><h2>Pendaftaran Alumni</h2></div><span class="heading-mark">✦</span></div>
+        <p class="muted">Isi data dengan benar. Pendaftaran akan diperiksa oleh admin sebelum diverifikasi.</p>
+        <form id="alumniForm">
+          <label>Nama lengkap<input name="nama" required maxlength="120" placeholder="Masukkan nama lengkap"></label>
+          <label>Alamat lengkap<textarea name="alamat" required rows="2" maxlength="500" placeholder="Desa, kecamatan, kabupaten"></textarea></label>
+          <div class="form-row"><label>Tahun masuk<input name="masuk" type="number" min="1950" max="2100" required placeholder="Contoh: 2015"></label><label>Tahun lulus<input name="lulus" type="number" min="1950" max="2100" required placeholder="Contoh: 2021"></label></div>
+          <label>Nomor telepon / WhatsApp<input name="telepon" type="tel" required maxlength="25" placeholder="Contoh: 08xxxxxxxxxx"></label>
+          <button class="button button-primary full" type="submit">Kirim Pendaftaran</button>
+          <p class="form-note">Data kontak dan alamat hanya dapat dilihat admin pada demo ini.</p>
+        </form>
+      </section>
+
+      <section class="panel list-panel" id="data">
+        <div class="section-heading"><div><p class="eyebrow">DATABASE ALUMNI</p><h2>Data Alumni</h2></div><span class="heading-mark">✦</span></div>
+        <div class="toolbar"><input id="searchInput" type="search" placeholder="Cari nama alumni..." aria-label="Cari nama alumni"><select id="yearFilter" aria-label="Filter tahun lulus"><option value="">Semua tahun lulus</option></select></div>
+        <div id="publicAlumni" class="alumni-list"><div class="empty-state">Belum ada data alumni. Jadilah yang pertama mendaftar.</div></div>
+        <p class="privacy-note">Untuk menjaga privasi, daftar publik hanya menampilkan nama dan tahun lulus. Informasi alamat dan nomor WhatsApp tidak ditampilkan.</p>
+      </section>
+    </section>
+
+    <section class="panel admin-panel hidden" id="adminPanel">
+      <div class="section-heading"><div><p class="eyebrow">AREA TERBATAS</p><h2>Dashboard Admin</h2></div><button class="button button-light" id="logoutButton">Keluar</button></div>
+      <div id="adminLoginBox">
+        <p class="muted">Masuk untuk mengelola data alumni.</p>
+        <form id="adminLoginForm" class="login-form"><label>Username<input name="username" required autocomplete="username" placeholder="admin"></label><label>Password<input name="password" type="password" required autocomplete="current-password" placeholder="Password demo"></label><button class="button button-primary" type="submit">Login</button></form>
+        <p class="demo-warning"><strong>Mode demo:</strong> username <code>admin</code>, password <code>ainulhasan-demo</code>. Jangan gunakan login ini untuk website publik/produksi.</p>
+      </div>
+      <div id="adminWorkspace" class="hidden">
+        <div class="admin-tools"><input id="adminSearch" type="search" placeholder="Cari nama, alamat, atau nomor..."><button class="button button-primary" id="exportCsv">Ekspor CSV</button></div>
+        <div class="table-wrap"><table><thead><tr><th>Nama lengkap</th><th>Alamat</th><th>Masuk</th><th>Lulus</th><th>Telepon/WA</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="adminTableBody"></tbody></table></div>
+        <p class="form-note">Hapus data bersifat permanen pada penyimpanan browser ini. Konfirmasi akan ditampilkan sebelum data dihapus.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="footer-brand"><img src="assets/logo-pondok-ainul-hasan.png" alt=""><div><strong>Pondok Pesantren Ainul Hasan</strong><span>Wonorejo · Maron · Probolinggo</span></div></div><p>Menjalin Silaturahmi, Mendata Alumni, Menguatkan Ukhuwah.</p><small>© <span id="yearNow"></span> Sistem Informasi Alumni Pondok Pesantren Ainul Hasan</small></footer>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
